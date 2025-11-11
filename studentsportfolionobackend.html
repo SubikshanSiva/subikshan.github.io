@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SUBIKSHAN S — Frontend Developer</title>
+  <meta name="description" content="Portfolio of a frontend developer — HTML, CSS, JavaScript" />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --bg-grad: linear-gradient(180deg,#071021 0%,#071827 100%);
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#6ee7b7;
+      --accent-2:#60a5fa;
+      --text:#e6eef6;
+      --glass: rgba(255,255,255,0.02);
+      --btn-text:#012;
+      --shadow: 0 6px 30px rgba(2,6,23,.6);
+      --duration: 350ms;
+    }
+
+    body.light {
+      --bg: #f5f7fa;
+      --bg-grad: linear-gradient(180deg,#f7fafc 0%,#eef2f7 100%);
+      --card: #ffffff;
+      --muted: #4b5563;
+      --accent: #3b82f6;
+      --accent-2: #60a5fa;
+      --text: #1f2937;
+      --glass: rgba(0,0,0,0.03);
+      --btn-text: #fff;
+      --shadow: 0 6px 24px rgba(16,24,40,0.06);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background: var(--bg-grad);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      transition: background var(--duration) ease, color var(--duration) ease;
+    }
+
+    .container{max-width:1000px;margin:40px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .avatar{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#012;
+      box-shadow:0 4px 18px rgba(0,0,0,.5);overflow:hidden;flex-shrink:0;
+      transition: transform var(--duration) ease, box-shadow var(--duration) ease, border-radius var(--duration) ease;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    h1{margin:0;font-size:22px;transition:color var(--duration) ease}
+    p.lead{margin:6px 0 0;color:var(--muted);transition:color var(--duration) ease}
+    nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px;transition:color var(--duration) ease}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:28px;margin-top:28px;align-items:center}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:20px;border-radius:12px;box-shadow:var(--shadow);
+      transition: background var(--duration) ease, box-shadow var(--duration) ease;
+      backdrop-filter: blur(6px);
+    }
+    .intro h2{margin:0 0 8px;font-size:28px}
+    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .chip{
+      padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);
+      font-size:13px;color:var(--muted);transition:background var(--duration) ease,color var(--duration) ease;
+    }
+    .cta{margin-top:18px}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:10px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:var(--btn-text);font-weight:600;text-decoration:none;border:none;cursor:pointer;
+      transition:transform 160ms ease, box-shadow 160ms ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(110,231,183,.12)}
+
+    /* theme toggle styles (animated) */
+    .theme-toggle{
+      --size:44px;
+      width:var(--size);
+      height:28px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-radius:999px;
+      padding:4px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      position:relative;
+      cursor:pointer;
+      transition: background var(--duration) ease, transform 160ms ease;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .theme-toggle .knob{
+      width:20px;height:20px;border-radius:50%;
+      background: #fff; box-shadow: 0 2px 8px rgba(2,6,23,0.4);
+      transform: translateX(0);
+      transition: transform var(--duration) cubic-bezier(.2,.9,.2,1), background var(--duration) ease, box-shadow var(--duration) ease;
+    }
+    body.light .theme-toggle{
+      background: linear-gradient(90deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02));
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    /* knob positions for dark / light */
+    .theme-toggle[data-theme="dark"] .knob{ transform: translateX(0); background: #fff; box-shadow: 0 2px 8px rgba(2,6,23,0.4); }
+    .theme-toggle[data-theme="light"] .knob{ transform: translateX(16px); background: linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow: 0 6px 18px rgba(59,130,246,0.18); }
+
+    .toggle-icons{
+      display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);pointer-events:none;
+      transition:opacity var(--duration) ease, color var(--duration) ease;
+    }
+    .toggle-icons .sun{opacity:0}
+    body.light .toggle-icons .sun{opacity:1;color:#f59e0b}
+    body.light .toggle-icons .moon{opacity:0}
+    body:not(.light) .toggle-icons .moon{opacity:1;color:#93c5fd}
+
+    /* project grid */
+    #projects{margin-top:28px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+    .project{padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);border:1px solid rgba(255,255,255,0.03);transition:transform 220ms ease, box-shadow 220ms ease}
+    .project:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(2,6,23,0.25)}
+    .proj-img{height:120px;border-radius:8px;background:linear-gradient(135deg,#0b1220,rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;transition:background var(--duration) ease}
+    .proj-title{margin:10px 0 6px;font-weight:700}
+    .proj-desc{color:var(--muted);font-size:13px;margin:0 0 10px}
+    .proj-links a{margin-right:8px;font-size:13px;color:var(--muted);text-decoration:none}
+
+    /* contact */
+    footer{margin-top:36px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .contact{color:var(--muted);font-size:14px}
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .avatar{width:48px;height:48px}
+      .hero .card{order:2}
+    }
+
+    /* avatar image fallback & gentle entrance */
+    .avatar{opacity:0;transform:translateY(-4px);animation:avatarIn 420ms ease forwards 120ms}
+    @keyframes avatarIn{to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="avatar">
+          <!-- Use relative path for web deployment, absolute C:\ won't load in browser -->
+          <img src="C:\ssn\html\subiprofile_edited.jpg" alt="SUBIKSHAN S" />
+        </div>
+
+        <div>
+          <h1>SUBIKSHAN S</h1>
+          <p class="lead">Frontend Developer — HTML • CSS • JavaScript</p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/SubikshanSiva" target="_blank">GitHub</a>
+      </nav>
+
+      <!-- Animated toggle (keeps your previous button position/appearance minimal) -->
+      <button id="toggleTheme" class="btn" aria-label="Toggle theme" style="display:flex;align-items:center;gap:10px">
+        <div class="theme-toggle" id="themeSwitch" data-theme="dark" aria-hidden="true">
+          <div class="knob"></div>
+        </div>
+        <div class="toggle-icons">
+          <span class="moon">🌙</span>
+          <span class="sun">☀️</span>
+        </div>
+      </button>
+    </header>
+
+    <section class="hero">
+      <div class="card intro">
+        <h2>Hi, I’m SUBIKSHAN S 👋</h2>
+        <p class="lead">I build responsive and accessible web pages using HTML, CSS, and vanilla JavaScript. I enjoy turning ideas into user-friendly interfaces.</p>
+
+        <div class="skills">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Responsive Design</span>
+          <span class="chip">Git</span>
+        </div>
+
+        <div class="cta">
+          <a class="btn" href="#projects">See Projects</a>
+        </div>
+      </div>
+
+      <aside class="card" style="text-align:center">
+        <h3 style="margin-top:0">Quick Info</h3>
+        <p style="margin:6px 0;color:var(--muted)">MANAKULA VINAYAGAR INSTITUTE OF TECHNOLOGY | 2028 | AIML</p>
+        <p style="margin:4px 0;color:var(--muted)">Location: Puducherry, India</p>
+        <p style="margin:12px 0"><a class="btn" href="mailto:subikshansivasms@gmail.com">Contact Me</a></p>
+        <p style="color:var(--muted);font-size:13px;margin-top:14px">Live demo & source links below each project</p>
+      </aside>
+    </section>
+
+    <section id="projects">
+      <h2 style="margin:18px 0">Selected Projects</h2>
+      <div class="grid">
+        <article class="project">
+          <div class="proj-img">Landing Page</div>
+          <div class="proj-title">Responsive Landing Page</div>
+          <p class="proj-desc">A pixel-perfect clone of a modern SaaS landing page with responsive layout and simple animations.</p>
+          <div class="proj-links">
+            <a href="https://subikshan.github.io/project1" target="_blank">Live</a>
+            <a href="https://github.com/SubikshanSiva/project1" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="proj-img">To-Do App</div>
+          <div class="proj-title">To-Do List (Vanilla JS)</div>
+          <p class="proj-desc">A small single-page app with localStorage persistence and basic UX patterns.</p>
+          <div class="proj-links">
+            <a href="https://subikshan.github.io/project2" target="_blank">Live</a>
+            <a href="https://github.com/SubikshanSiva/project2" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="proj-img">Form</div>
+          <div class="proj-title">Contact Form + Validation</div>
+          <p class="proj-desc">A contact form with client-side validation and accessible markup.</p>
+          <div class="proj-links">
+            <a href="https://subikshan.github.io/project3" target="_blank">Live</a>
+            <a href="https://github.com/SubikshanSiva/project3" target="_blank">Code</a>
+          </div>
+        </article>
+      </div>
+
+      <p style="margin-top:14px;color:var(--muted);font-size:13px">Tip: Add screenshots and short case-study sentences to each project to increase recruiter interest.</p>
+    </section>
+
+    <section id="contact" style="margin-top:28px">
+      <div class="card">
+        <h2 style="margin-top:0">Contact</h2>
+        <p class="contact">Email: <a href="mailto:subikshansivasms@gmail.com">subikshansivasms@gmail.com</a> • GitHub: <a href="https://github.com/SubikshanSiva" target="_blank">github.com/SubikshanSiva</a></p>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">You can also link your LinkedIn or portfolio PDF here.</p>
+
+        <form id="contactForm" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;max-width:520px">
+          <input id="name" placeholder="Your Name" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" required>
+          <input id="email" type="email" placeholder="Your email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" required>
+          <textarea id="message" placeholder="Message" rows="4" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+          <div style="display:flex;gap:8px">
+            <button type="submit" class="btn">Send</button>
+            <button type="button" id="copyEmail" class="btn secondary">Copy Email</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div style="color:var(--muted);font-size:13px" id="yearText">© {2025} SUBIKSHAN S — Frontend Developer</div>
+      <div>
+        <a href="https://github.com/SubikshanSiva" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:12px">GitHub</a>
+        <a href="#contact" style="color:var(--muted);text-decoration:none">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // keep original demo behaviors and add animated theme toggle
+    (function(){
+      // Elements
+      const toggleBtn = document.getElementById('toggleTheme');
+      const themeSwitch = document.getElementById('themeSwitch');
+
+      // read saved preference
+      const saved = localStorage.getItem('theme'); // 'light' or 'dark'
+      if (saved === 'light') {
+        document.body.classList.add('light');
+        themeSwitch.setAttribute('data-theme','light');
+      } else {
+        themeSwitch.setAttribute('data-theme','dark');
+      }
+
+      // toggle handler with small micro-animation
+      toggleBtn.addEventListener('click', function(){
+        const isLight = document.body.classList.toggle('light');
+        themeSwitch.setAttribute('data-theme', isLight ? 'light' : 'dark');
+        // subtle pulse on avatar
+        const avatar = document.querySelector('.avatar');
+        if (avatar) {
+          avatar.style.transform = 'scale(0.98)';
+          setTimeout(()=> avatar.style.transform = '', 200);
+        }
+        // save preference
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+
+      // Demo form behavior
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        alert('This is a demo form. Link your email or form backend (eg. Formspree) to receive messages.');
+      });
+
+      // Copy email
+      document.getElementById('copyEmail').addEventListener('click', function(){
+        navigator.clipboard.writeText('subikshansivasms@gmail.com').then(()=>{
+          alert('Email copied to clipboard');
+        });
+      });
+
+      // dynamic year
+      document.getElementById('yearText').textContent = `© ${new Date().getFullYear()} SUBIKSHAN S — Frontend Developer`;
+    })();
+  </script>
+</body>
+</html>
