@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SUBIKSHAN S — Frontend Developer</title>
+  <meta name="description" content="Portfolio of a frontend developer — HTML, CSS, JavaScript" />
+
+  <!-- Inline CSS -->
+  <style>
+    :root{
+      --bg:#0f1724; --bg-grad:linear-gradient(180deg,#071021 0%,#071827 100%);
+      --card:#0b1220; --muted:#9aa4b2; --accent:#6ee7b7; --accent-2:#60a5fa;
+      --text:#e6eef6; --glass:rgba(255,255,255,0.02); --btn-text:#012;
+      --shadow:0 6px 30px rgba(2,6,23,.6); --duration:350ms;
+    }
+    body.light {
+      --bg:#f5f7fa; --bg-grad:linear-gradient(180deg,#f7fafc 0%,#eef2f7 100%);
+      --card:#fff; --muted:#4b5563; --accent:#3b82f6; --accent-2:#60a5fa;
+      --text:#1f2937; --glass:rgba(0,0,0,0.03); --btn-text:#fff;
+      --shadow:0 6px 24px rgba(16,24,40,0.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:var(--bg-grad);color:var(--text);transition:background var(--duration),color var(--duration);}
+    .container{max-width:1000px;margin:40px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    h1{margin:0;font-size:22px} p.lead{margin:6px 0 0;color:var(--muted)}
+    nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px}
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:28px;margin-top:28px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      padding:20px;border-radius:12px;box-shadow:var(--shadow);backdrop-filter:blur(6px);}
+    .intro h2{margin:0 0 8px;font-size:28px}
+    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .chip{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px;color:var(--muted);}
+    .cta{margin-top:18px}
+    .btn{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:var(--btn-text);font-weight:600;text-decoration:none;border:none;cursor:pointer;}
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(110,231,183,.12)}
+    .theme-toggle{--size:44px;width:var(--size);height:28px;background:rgba(255,255,255,0.06);
+      border-radius:999px;padding:4px;display:inline-flex;align-items:center;cursor:pointer;}
+    .theme-toggle .knob{width:20px;height:20px;border-radius:50%;background:#fff;transition:transform var(--duration);}
+    .theme-toggle[data-theme="light"] .knob{transform:translateX(16px);background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+    .toggle-icons{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+    .toggle-icons .sun{opacity:0} body.light .toggle-icons .sun{opacity:1;color:#f59e0b}
+    body.light .toggle-icons .moon{opacity:0} body:not(.light) .toggle-icons .moon{opacity:1;color:#93c5fd}
+    #projects{margin-top:28px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+    .project{padding:14px;border-radius:10px;background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.03)}
+    .proj-img{height:120px;border-radius:8px;background:#0b1220;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    .proj-title{margin:10px 0 6px;font-weight:700}
+    .proj-desc{color:var(--muted);font-size:13px;margin:0 0 10px}
+    .proj-links a{margin-right:8px;font-size:13px;color:var(--muted);text-decoration:none}
+    footer{margin-top:36px;display:flex;justify-content:space-between;align-items:center}
+    .contact{color:var(--muted);font-size:14px}
+    @media(max-width:880px){.hero{grid-template-columns:1fr;}.avatar{width:48px;height:48px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="avatar"><img src="images/subiprofile_edited.jpg" alt="SUBIKSHAN S"></div>
+        <div>
+          <h1>SUBIKSHAN S</h1>
+          <p class="lead">Frontend Developer — HTML • CSS • JavaScript</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/SubikshanSiva" target="_blank">GitHub</a>
+      </nav>
+      <button id="toggleTheme" class="btn" aria-label="Toggle theme" style="display:flex;align-items:center;gap:10px">
+        <div class="theme-toggle" id="themeSwitch" data-theme="dark"><div class="knob"></div></div>
+        <div class="toggle-icons"><span class="moon">🌙</span><span class="sun">☀️</span></div>
+      </button>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="card intro">
+        <h2>Hi, I’m SUBIKSHAN S 👋</h2>
+        <p class="lead">I build responsive and accessible web pages using HTML, CSS, and vanilla JavaScript.</p>
+        <div class="skills">
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Responsive Design</span><span class="chip">Git</span>
+        </div>
+        <div class="cta"><a class="btn" href="#projects">See Projects</a></div>
+      </div>
+      <aside class="card" style="text-align:center">
+        <h3 style="margin-top:0">Quick Info</h3>
+        <p style="margin:6px 0;color:var(--muted)">MANAKULA VINAYAGAR INSTITUTE OF TECHNOLOGY | 2028 | AIML</p>
+        <p style="margin:4px 0;color:var(--muted)">Location: Puducherry, India</p>
+        <p style="margin:12px 0"><a class="btn" href="mailto:subikshansivasms@gmail.com">Contact Me</a></p>
+        <p style="color:var(--muted);font-size:13px;margin-top:14px">Live demo & source links below each project</p>
+	      </aside>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2 style="margin:18px 0">Selected Projects</h2>
+      <div class="grid">
+        <article class="project">
+          <div class="proj-img">Landing Page</div>
+          <div class="proj-title">Responsive Landing Page</div>
+          <p class="proj-desc">A pixel-perfect clone of a modern SaaS landing page with responsive layout and simple animations.</p>
+          <div class="proj-links">
+            <a href="https://subikshan.github.io/project1" target="_blank">Live</a>
+            <a href="https://github.com/SubikshanSiva/project1" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="proj-img">To-Do App</div>
+          <div class="proj-title">To-Do List (Vanilla JS)</div>
+          <p class="proj-desc">A small single-page app with localStorage persistence and basic UX patterns.</p>
+          <div class="proj-links">
+            <a href="https://subikshan.github.io/project2" target="_blank">Live</a>
+            <a href="https://github.com/SubikshanSiva/project2" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="proj-img">Form</div>
+          <div class="proj-title">Contact Form + Validation</div>
+          <p class="proj-desc">A contact form with client-side validation and accessible markup.</p>
+          <div class="proj-links">
+            <a href="https://subikshan.github.io/project3" target="_blank">Live</a>
+            <a href="https://github.com/SubikshanSiva/project3" target="_blank">Code</a>
+          </div>
+        </article>
+      </div>
+
+      <p style="margin-top:14px;color:var(--muted);font-size:13px">
+        Tip: Add screenshots and short case-study sentences to each project to increase recruiter interest.
+      </p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="margin-top:28px">
+      <div class="card">
+        <h2 style="margin-top:0">Contact</h2>
+        <p class="contact">
+          Email: <a href="mailto:subikshansivasms@gmail.com">subikshansivasms@gmail.com</a> • 
+          GitHub: <a href="https://github.com/SubikshanSiva" target="_blank">github.com/SubikshanSiva</a>
+        </p>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">
+          You can also link your LinkedIn or portfolio PDF here.
+        </p>
+
+        <!-- Netlify-enabled form -->
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+              id="contactForm" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;max-width:520px">
+          <input type="hidden" name="form-name" value="contact">
+          <input name="name" id="name" placeholder="Your Name" required
+                 style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+          <input name="email" id="email" type="email" placeholder="Your Email" required
+                 style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+          <textarea name="message" id="message" placeholder="Message" rows="4" required
+                    style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+          <div style="display:flex;gap:8px">
+            <button type="submit" class="btn">Send</button>
+            <button type="button" id="copyEmail" class="btn secondary">Copy Email</button>
+          </div>
+        </form>
+
+        <!-- Success/Error message -->
+        <div id="formMessage" style="display:none;margin-top:12px;font-weight:bold;"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div style="color:var(--muted);font-size:13px" id="yearText"></div>
+      <div>
+        <a href="https://github.com/SubikshanSiva" target="_blank" style="color:var(--muted);text-decoration:none;margin-right:12px">GitHub</a>
+        <a href="#contact" style="color:var(--muted);text-decoration:none">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme toggle
+    const toggleBtn = document.getElementById('toggleTheme');
+    const themeSwitch = document.getElementById('themeSwitch');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.body.classList.add('light');
+      themeSwitch.setAttribute('data-theme','light');
+    } else {
+      themeSwitch.setAttribute('data-theme','dark');
+    }
+    toggleBtn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      themeSwitch.setAttribute('data-theme', isLight ? 'light' : 'dark');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // Copy email button
+    document.getElementById('copyEmail').addEventListener('click', function(){
+      navigator.clipboard.writeText('subikshansivasms@gmail.com').then(()=>{
+        alert('Email copied to clipboard');
+      });
+    });
+
+    // Netlify form submission with pop-out message
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('formMessage');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch("/", { method: "POST", body: data })
+        .then(() => {
+          msg.textContent = "✅ Message sent successfully!";
+          msg.style.color = "limegreen";
+          msg.style.display = "block";
+          form.reset();
+          setTimeout(() => { msg.style.display = "none"; }, 3000);
+        })
+        .catch(() => {
+          msg.textContent = "❌ Error sending message. Try again.";
+          msg.style.color = "red";
+          msg.style.display = "block";
+        });
+    });
+
+    // Dynamic year
+    document.getElementById('yearText').textContent =
+      `© ${new Date().getFullYear()} SUBIKSHAN S — Frontend Developer`;
+  </script>
+</body>
+</html>
